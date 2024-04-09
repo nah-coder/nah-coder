@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>
+    Thêm Sinh Viên
+    <Form th:action="@{/student_save}" method="post" th:object="${student}">
+        id:
+        <input type="text" th:field="${student.id}">
+        <br>
+        name:
+        <input type="text" th:field="${student.lastName}">
+        <br>
+        address:
+        <input type="text" th:field="${student.address}">
+        <br>
+        clazz:
+        <input type="text" th:field="${student.clazz}">
+        <br>
+        point:
+        <input type="text" th:field="${student.point}">
+        <br>
+        <input type="submit" value="submit"/>
+    </Form>
+</h1>
+</body>
+</html>
