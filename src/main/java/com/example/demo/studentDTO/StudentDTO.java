@@ -14,6 +14,8 @@ import java.util.List;
 @NoArgsConstructor
 public class StudentDTO {
     private Integer id;
+    private String firstName;
+    private String lastName;
     private String name;
     private String address;
     private ClazzDTO clazz;

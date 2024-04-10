@@ -44,7 +44,7 @@ public class studentController {
 
     @DeleteMapping("")
     String delete(@RequestParam("id")int id,@RequestBody StudentDTO studentDTO){
-        String message = studentService.delete(id, studentDTO);
+        String message = studentService.delete(id);
         return message;
     }
 

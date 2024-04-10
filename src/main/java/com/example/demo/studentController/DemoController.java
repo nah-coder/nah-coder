@@ -72,4 +72,37 @@ public class DemoController {
         studentService.save(student);
         return "redirect:/view/student";
     }
+
+////////////////////////////////////////
+
+    @GetMapping("/update-student/{id}")
+    public String UpdateStudent(Model model,
+                                @PathVariable("id") int id) {
+        model.addAttribute("id", id);
+        Student studentDTO = studentService.findById(id);
+        model.addAttribute("studentDTO", studentDTO);
+        return "Update-student";
+    }
+
+    // sửa sinh viên
+    @PostMapping("/updatestudent/{id}")
+    public String updateStudent(@PathVariable("id") int id,
+                                @ModelAttribute("studentDTO") StudentDTO studentDTO) {
+        studentService.update(id, studentDTO);
+        return "redirect:/view/student";
+
+    }
+    // chuyển đến trang xoá sinh viên
+    @GetMapping("/delete-student")
+    public String Deletestudent(Model model){
+        return "Delete-student";
+    }
+
+
+    // Xóa sinh viên theo ID
+    @PostMapping("deletestudent")
+    public String deleteStudent(@RequestParam("id") int id) {
+        studentService.delete(id);
+        return "redirect:/view/student";
+    }
 }

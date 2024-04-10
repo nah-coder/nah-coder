@@ -1,45 +1,82 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layput"
+        layout:decorate="~{layout/index}"
+>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<h1 th:text="${'hello world ' + name}">
-    Anh Huy
+<h1 th:text="${'Hello ' + ' Anh Huy'}">
+
 </h1>
-<!--<div th:text="${name}">-->
-
-<!--</div>-->
-<!--<div th:text="${name}" ></div>-->
-<!--<div th:text="${studentDTO.name}"></div>-->
-<!--<div th:text="${studentDTO.address}"></div>-->
-<div th:each="student:${studentDTOS}">
-    <div th:text="${student.lastName}"></div>
-    <div th:text="${student.id}"></div>
-    <div th:text="${student.address}"></div>
-</div>
-<div th:each="student:${studentDTOS_All}"><br>
-    <div th:text="${student.id}"></div>
-    <div th:text="${student.lastName}"></div>
-    <div th:text="${student.firstName}"></div>
-    <div th:text="${student.address}"></div>
-<!--    <div th:text="${student.clazz}"></div>-->
-</div>
-
-<!--<div th:each="student:${studentDTOS}">-->
-<!--    <div th:text="${studentDTO.lastName}"></div>-->
+<!--<div th:text="${name}"></div>-->
+<!--&lt;!&ndash;<div th:text="${student.name}"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div th:text="${student.address}"></div>&ndash;&gt;-->
+<!--<div th:each="studentDTO :${studentDTOS}">-->
 <!--    <div th:text="${studentDTO.address}"></div>-->
-<!--    <div th:text="${studentDTO.firstName}"></div>-->
-<!--    <div th:text="${studentDTO.id}"></div>-->
-
+<!--    <div th:text="${studentDTO.name}"></div>-->
 <!--</div>-->
-
-<div>
-    <a th:href="@{/view/add-student}">
-        thêm sinh viên
-    </a>
+<div layout:fragment="content" class="container-fluid">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th> ID</th>
+                <th> Họ</th>
+                <th> Tên</th>
+                <th> Địa Chỉ </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student :${studentDTOS_All}">
+                <td> <div th:text="${student.id}"></div></td>
+                <td> <div th:text="${student.lastName}"></div></td>
+                <td> <div th:text="${student.firstName}"></div></td>
+                <td> <div th:text="${student.address}"></div></td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            <a th:href="@{/view/add-student}">
+                Thêm Sinh Viên
+            </a>
+        </div>
+        <div>
+            <a th:href="@{/update-student/{id}(id = ${1})}">
+                Sửa Sinh Viên
+            </a>
+        </div>
+        <div>
+            <a th:href="@{/delete-student}">
+                Xoá sinh viên
+            </a>
+        </div>
+    </div>
 </div>
 
+
+
+
+<!--<div th:each="student :${studentAll}">-->
+<!--    <div th:text="${student.address}"></div>-->
+<!--    <div th:text="${student.lastName}"></div>-->
+<!--    <div th:text="${student.firstName}"></div>-->
+<!--    <div th:text="${student.id}"></div>-->
+</div>
+
+
+<!--<div>-->
+<!--    <a th:href="@{/update-student/{id}(id = ${1})}">-->
+<!--        Sửa Sinh Viên-->
+<!--    </a>-->
+<!--</div>-->
+<!--<div>-->
+<!--    <a th:href="@{/delete-student}">-->
+<!--        Xoá sinh viên-->
+<!--    </a>-->
+<!--</div>-->
 </body>
 </html>

@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,16 +37,36 @@ public class StudentService {
         return studentRepository.findStudentByID();
     }
 
+    public Student findById(int id){
+        Optional<Student> optionalStudent = studentRepository.findById(id);
+        if(optionalStudent.isEmpty()){
+            System.out.println("Không tìm thấy sinh viên");
+            return null;
+        }
+        return optionalStudent.get();
+    }
+
     public List<StudentDTO> findbyaddress(String address) {
         List<Student> students = studentRepository.findByAddress(address);
         return studentMapper.toDto(students);
     }
-    public String save(StudentDTO studentDTO) {
-        Clazz clazz = clazzMapper.toEntity(studentDTO.getClazz());
-        clazz = clazzRepository.save(clazz);
-        Student student = studentMapper.toEntity(studentDTO);
-        student.setClazz(clazz);
-        studentRepository.save(student);
+//    public String save(StudentDTO studentDTO) {
+//        Clazz clazz = clazzMapper.toEntity(studentDTO.getClazz());
+//        clazz = clazzRepository.save(clazz);
+//        Student student = studentMapper.toEntity(studentDTO);
+//        student.setClazz(clazz);
+//        studentRepository.save(student);
+//        return "Thêm thành công";
+//    }
+
+    public String save(StudentDTO student){
+        Student students = new Student();
+//        String name = student.getName(); // "Nguyễn Duy";
+
+        students.setLastName(students.getLastName());
+        students.setFirstName(students.getFirstName());
+        students.setAddress(student.getAddress());
+        studentRepository.save(students);
         return "Thêm thành công";
     }
 
@@ -79,12 +100,19 @@ public class StudentService {
 //        return "Cập nhật thành công";
 //    }
 
-    public String delete(int id, StudentDTO studentDTO) {
-        boolean existbyid = studentRepository.existsById(id);
-        if (!existbyid) return "ko có id nay ! ";
-        Student student = new Student();
+//    public String delete(int id, StudentDTO studentDTO) {
+//        boolean existbyid = studentRepository.existsById(id);
+//        if (!existbyid) return "ko có id nay ! ";
+//        Student student = new Student();
+//        studentRepository.deleteById(id);
+//        return "xóa thành công";
+//    }
+
+    public String delete (int id){
+        boolean existsById = studentRepository.existsById(id);
+        if (!existsById) return "Không có sinh viên có id = " +id;
         studentRepository.deleteById(id);
-        return "xóa thành công";
+        return "Xóa thành công";
     }
 
 //    public StudentDTO findStudentByID(int id){
